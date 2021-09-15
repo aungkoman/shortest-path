@@ -79,7 +79,8 @@ else if($operation == "get_graph"){
         $returned_data['status'] = "success";
     }
     else{
-        $returned_data['err_msg']= "There is no rows in link table in sql "+$sql;
+        $returned_data['status'] = "fail";
+        $returned_data['err_msg']= "There is no rows in link table in sql ".$sql;
     }
 
 
@@ -101,6 +102,27 @@ else if($operation == "get_places"){
             $num_index++;
         }
         //echo "returend data is ".json_encode($returned_rows);
+        $returned_data['places'] = $returned_rows;
+        $returned_data['status'] = "success";
+    }
+    else{
+        $returned_data['err_msg']= "There is no rows in places table in sql "+$sql;
+    }
+
+
+}
+else if($operation == "places"){
+
+    $sql="SELECT * FROM places";
+    $result=$conn->query($sql);
+    if ($result->num_rows >0){
+        $num_index = 0;
+        $returned_rows= array();
+
+        while($row=$result->fetch_assoc()){
+            $returned_rows[$num_index] = $row;
+            $num_index++;
+        }
         $returned_data['places'] = $returned_rows;
         $returned_data['status'] = "success";
     }
@@ -150,31 +172,32 @@ else if($operation == "shortest_path"){
         $returned_data['status'] = "success";
         $returned_data['solution'] = $g->shortestPath($source,$destination);
 
+            
+        $sql="SELECT * FROM places";
+        $result=$conn->query($sql);
+        if ($result->num_rows >0){
+            $num_index = 0;
+            $returned_rows= array();
 
-
-    }
-    else{
-        $returned_data['err_msg']= "There is no rows in places table in sql "+$sql;
-    }
-
-
-    $sql="SELECT * FROM places";
-    $result=$conn->query($sql);
-    if ($result->num_rows >0){
-        $num_index = 0;
-        $returned_rows= array();
-
-        while($row=$result->fetch_assoc()){
-            $returned_rows[$num_index] = $row;
-            $num_index++;
+            while($row=$result->fetch_assoc()){
+                $returned_rows[$num_index] = $row;
+                $num_index++;
+            }
+            //echo "returend data is ".json_encode($returned_rows);
+            $returned_data['places'] = $returned_rows;
+            $returned_data['status'] = "success";
         }
-        //echo "returend data is ".json_encode($returned_rows);
-        $returned_data['places'] = $returned_rows;
-        $returned_data['status'] = "success";
+        else{
+            $returned_data['err_msg']= "There is no rows in places table in sql "+$sql;
+        }
+
     }
     else{
-        $returned_data['err_msg']= "There is no rows in places table in sql "+$sql;
+        $returned_data['status']= "fail";
+        $returned_data['err_msg']= "There is no rows in places table in sql ".$sql;
     }
+
+
 
 
 }

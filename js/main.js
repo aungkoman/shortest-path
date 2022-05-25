@@ -16,11 +16,19 @@ var mymap = L.map('mapid').setView([22.0333331, 96.4666670], 15);
 // https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 // 'http://' + localhost_ip + '/google_map/leaflet/tiles/0/{z}/{x}/{y}.png'
 mymap.setView([22.535243, 75.750383], 15);
+/*
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: 'Sandar Map',
     maxZoom: 18,
     minZoom: 13
 }).addTo(mymap);
+*/
+
+L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+}).addTo(mymap);
+
 
 
 // mymap.locate({ setView: true, maxZoom: 16 });
@@ -154,7 +162,8 @@ $("#draw_graph_button").on('click', function() {
     var requested_data = { operation: "get_graph" };
     $.ajax({
             method: "GET",
-            url: "http://" + localhost_ip + "/google_map/server.php",
+            //url: "http://" + localhost_ip + "/google_map/server.php",
+            url: "./server.php",
             data: requested_data
         })
         .done(function(msg) {
@@ -201,7 +210,8 @@ $("#categories_button").on('click', function() {
     var requested_data = { operation: "get_categories" };
     $.ajax({
             method: "GET",
-            url: "http://" + localhost_ip + "/google_map/server.php",
+            //url: "http://" + localhost_ip + "/google_map/server.php",
+            url: "./server.php",
             data: requested_data
         })
         .done(function(msg) {
@@ -261,7 +271,7 @@ function add_listner_on_list() {
         var requested_data = { operation: "get_places", cat_id: real_cat_id };
         $.ajax({
                 method: "GET",
-                url: "http://" + localhost_ip + "/google_map/server.php",
+                url: "./server.php",
                 data: requested_data
             })
             .done(function(msg) {
@@ -337,7 +347,7 @@ function add_listner_on_place_list() {
         var requested_data = { operation: "shortest_path", source_id: user_location_id, destination_id: data_id };
         $.ajax({
                 method: "GET",
-                url: "http://" + localhost_ip + "/google_map/server.php",
+                url: "./server.php",
                 data: requested_data
             })
             .done(function(msg) {
@@ -499,7 +509,7 @@ function hide_loading_modal() {
 var requested_data_places = { operation: "places" };
 $.ajax({
         method: "GET",
-        url: "http://" + localhost_ip + "/google_map/server.php",
+        url: "./server.php",
         data: requested_data_places
     })
     .done(function(msg) {
@@ -529,7 +539,7 @@ function findShortestPath(source_id, destination_id) {
     var requested_data = { operation: "shortest_path", source_id: source_id, destination_id: destination_id };
     $.ajax({
             method: "GET",
-            url: "http://" + localhost_ip + "/google_map/server.php",
+            url: "./server.php",
             data: requested_data
         })
         .done(function(msg) {

@@ -15,7 +15,8 @@ var mymap = L.map('mapid').setView([22.0333331, 96.4666670], 15);
 // FCTS 22.535243,75.750383
 // https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png
 // 'http://' + localhost_ip + '/google_map/leaflet/tiles/0/{z}/{x}/{y}.png'
-mymap.setView([22.535243, 75.750383], 15);
+// mymap.setView([22.535243, 75.750383], 15);
+mymap.setView([22.012989,  96.454909], 18);
 /*
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: 'Sandar Map',
@@ -193,7 +194,7 @@ $("#draw_graph_button").on('click', function() {
                         [places[source_node_index].lat, places[source_node_index].long],
                         [places[destination_node_index].lat, places[destination_node_index].long]
                     ];
-                    var polyline = L.polyline(latlngs, { color: 'green' }).addTo(mymap);
+                    var polyline = L.polyline(latlngs, { color: 'white' }).addTo(mymap);
                 }
             } else {
                 var error_msg = returned_data.err_msg;

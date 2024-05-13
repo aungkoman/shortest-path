@@ -161,6 +161,7 @@ else if($operation == "shortest_path"){
 
         //echo "<h2>The Pol Graph</h2>";
         //echo json_encode($pol_graph);
+        //die;
 
         //echo "<h2>The Solution Graph</h2>";
         $g = new Dijkstra($pol_graph);
